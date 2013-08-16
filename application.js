@@ -1,105 +1,71 @@
+
+// DIE
+
+function Die() {
+  this.value = 0,
+  this.sides = 6
+};
+
+Die.prototype.roll = function(){
+  var newValue = Math.floor(Math.random() * 6) + 1;
+  this.value = newValue;
+};
+
+// BOARD 
+
+function Board() {
+  this.bag = [];
+};
+
+Board.prototype.addDie = function() {
+  this.bag.push(new Die);
+  $('.dice').append('<div class="die">0</div>');
+};
+
+// make method called render bag 
+
+Board.prototype.rollAll = function(){
+  // console.log(this.bag); 
+  $(this.bag).each(function(index,element) {
+    this.roll();
+  });
+};
+
+Board.prototype.renderAll = function(){
+  var self = this;
+  $('.die').each(function(index){ 
+    // bag is an array, treat it like one
+    $(this).text(self.bag[index].value);
+  });
+};
+
+// function renderDie(){
+//   $('.dice').append('<div class="die">0</div>');
+// }
+
+// function rollDie(die){
+//   console.log('derp')
+// }
+
+// function rollAll(){
+//   // $.each()
+//   console.log('hello')
+// }
+
 $(document).ready(function() {
 
+  // initialize board
+  var diceBoard = new Board;
   
+  diceBoard.rollAll();
+  $('#roller button.add').on('click', function() {
+    diceBoard.addDie();
+  });
 
-  
+  $('#roller button.roll').on('click', function() {
+    diceBoard.rollAll();
+    diceBoard.renderAll();
 
+  });
 });
 
-// 
-
-  // $('#roller button.add').on('click', function() {
-  //   console.log("WAT")
-  //   $('.dice').append('<div class="die">0</div>');
-  // });
-
-  // $('#roller button.roll').on('click', function() {
-  //   $('.die').each(function(k, die) {
-  //     var value = Math.floor((Math.random()*6)+1);
-  //     $(die).text(value);
-  //   });
-  // });
-
-
-  // Model
-//   // ---
-//   // classname = constructor
-//   Die = function(opts) {
-//     opts = opts || {sides: 6};
-//     this.sides = opts.sides;
-//     this.value = opts.sides;
-//     this.view  = $('<div class="die">'+ this.value +'</div>');
-//   }
-
-//   // class.prototype.methodname = function
-//   Die.prototype.roll = function(){
-//     this.value = Math.floor((Math.random()*this.sides)+1);
-//   }
-
-//   Die.prototype.render = function(container){
-//     this.view.text(this.value);
-//     container.append(this.view);
-//   }
-
-//   // ----
-
-//   Die.allDice = [];
-
-//   Die.addDie = function(numberOfDice){
-//     numberOfDice = numberOfDice || 1;
-//     for (numberOfDice; numberOfDice > 0; numberOfDice--) {
-//       Die.allDice.push(new Die({sides: 6}));  
-//     }
-//   }
-
-//   Die.rollAll = function() {
-//     for (var i = 0; i < Die.allDice.length; i++){
-//       Die.allDice[i].roll();  
-//     }
-//   };
-
-//   // View
-//   Die.renderAll = function(){
-//     for (var i = 0; i < Die.allDice.length; i++){
-//       // console.log(Die.allDice[i].value)
-//       Die.allDice[i].render($('.dice'));
-//     }
-//   }
-
-//   // Controller
-//   $('#roller button.add').on('click', function(){
-//     Die.addDie();
-//     Die.renderAll();
-//   });
-
-//   $('#roller button.roll').on('click', function(){
-//     Die.rollAll();
-//     Die.renderAll();
-//   });
-
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-// $(document).ready(function() {
-//   $('#roller button.add').on('click', function() {
-//     console.log("WAT")
-//     $('.dice').append('<div class="die">0</div>');
-//   });
-
-//   $('#roller button.roll').on('click', function() {
-//     $('.die').each(function(k, die) {
-//       var value = Math.floor((Math.random()*6)+1);
-//       $(die).text(value);
-//     });
-//   });
-// });
