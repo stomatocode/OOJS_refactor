@@ -7,7 +7,7 @@ $(document).ready(function() {
     opts = opts || {sides: 6};
     this.sides = opts.sides;
     this.value = opts.sides;
-    this.view  = $('<div class="die">'+ this.value +'</div>');
+    this.view  = $('<div class="die">' + this.value + '</div>');
   }
 
   // class.prototype.methodname = function
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
   Die.rollAll = function() {
     for (var i = 0; i < Die.allDice.length; i++){
-      Die.allDice[i].roll();  
+      Die.allDice[i].roll();
     }
   };
 
